@@ -80,78 +80,84 @@ const pacientes: Pacientes[] = [
   },
 ];
 
-// APARTADO 5 -------------- ¡pendiente!
+// APARTADO 5
 
-// const cuentaPacientesPorEspecialidad = (
-//   pacientes: Pacientes[]
-// ): NumeroPacientesPorEspecialidad => {
-//   const totalPacientes = pacientes.reduce(
-//     (acc, paciente) => {
-//       if (paciente.especialidad === "Medico de familia") {
-//         acc.medicoDeFamilia++;
-//       } else if (paciente.especialidad === "Pediatra") {
-//         acc.pediatria++;
-//       } else if (paciente.especialidad === "Cardiólogo") {
-//         acc.cardiologia++;
-//       }
-//       return acc;
-//     },
-//     { medicoDeFamilia: 0, pediatria: 0, cardiologia: 0 }
-//   );
+const cuentaPacientesPorEspecialidad = (
+  pacientes: Pacientes[]
+): NumeroPacientesPorEspecialidad => {
+  const totalPacientes = pacientes.reduce(
+    (acc, paciente) => {
+      if (paciente.especialidad === "Medico de familia") {
+        acc.medicoDeFamilia++;
+      } else if (paciente.especialidad === "Pediatra") {
+        acc.pediatria++;
+      } else if (paciente.especialidad === "Cardiólogo") {
+        acc.cardiologia++;
+      }
+      return acc;
+    },
+    { medicoDeFamilia: 0, pediatria: 0, cardiologia: 0 }
+  );
 
-//   return totalPacientes;
-// };
+  return totalPacientes;
+};
 
-// console.log(cuentaPacientesPorEspecialidad(pacientes));
+console.log(cuentaPacientesPorEspecialidad(pacientes));
 
-//APARTADO 4 - OK
+//APARTADO 4
 
-// const HayPacientesDePediatria = (pacientes: Pacientes[]): boolean => {
-//   const pediatraACasa = pacientes.some(
-//     (paciente) => paciente.especialidad === "Pediatra"
-//   );
-//   return pediatraACasa;
-// };
+const HayPacientesDePediatria = (pacientes: Pacientes[]): boolean => {
+  const pediatraACasa = pacientes.some(
+    (paciente) => paciente.especialidad === "Pediatra"
+  );
+  return pediatraACasa;
+};
 
-// console.log(HayPacientesDePediatria(pacientes));
+console.log(HayPacientesDePediatria(pacientes));
 
-//APARTADO 3 OK con matices. No me da como sugerencia la especialidad el VS
+//APARTADO 3
 
-// const reasignaPacientesAMedicoFamilia = (
-//   pacientes: Pacientes[]
-// ): Pacientes[] => {
-//   const asignarPediatriaAMedicoFamilia = pacientes.map((paciente) => {
-//     return {
-//       ...paciente,
-//       epecialidad: "Medico de familia",
-//     };
-//   });
-//   return asignarPediatriaAMedicoFamilia;
-// };
+const reasignaPacientesAMedicoFamilia = (pacientes: Pacientes[]): Pacientes[] =>
+  pacientes.map((paciente) =>
+    paciente.especialidad === "Pediatra"
+      ? { ...paciente, especialidad: "Medico de familia" }
+      : paciente
+  );
 
-// console.log(reasignaPacientesAMedicoFamilia(pacientes));
-// console.log(pacientes);
+console.log(reasignaPacientesAMedicoFamilia(pacientes));
+console.log(pacientes);
 
-// APARTADO 2 OK con matices, no he usado el modelo exactamente de función que nos daba el laboratorio
+// APARTADO 2
 
-// const activarProtocoloUrgencia = (pacientes: Pacientes[]): boolean => {
-//   const activarUrgencia = pacientes.every(
-//     (paciente) => paciente.frecuenciaCardiaca > 100 && paciente.temperatura > 39
-//   );
-//   return activarUrgencia;
-// };
+const activarProtocoloUrgencia = (pacientes: Pacientes[]): boolean => {
+  const activarUrgencia = pacientes.every(
+    (paciente) => paciente.frecuenciaCardiaca > 100 && paciente.temperatura > 39
+  );
+  return activarUrgencia;
+};
 
-// console.log(activarProtocoloUrgencia(pacientes));
+console.log(activarProtocoloUrgencia(pacientes));
 
-// APARTADO 1 - OK
+// APARTADO 1
 
-// const obtenPacientesAsignadosAPediatria = (
-//   pacientes: Pacientes[]
-// ): Pacientes[] => {
-//   const pacientesPediatria = pacientes.filter(
-//     (paciente) => paciente.especialidad === "Pediatra" && paciente.edad < 10
-//   );
-//   return pacientesPediatria;
-// };
+// Pacientes que están asignados a la especialidad de Pediatría
+const obtenPacientesAsignadosAPediatria = (
+  pacientes: Pacientes[]
+): Pacientes[] => {
+  const pacientesPediatria = pacientes.filter(
+    (paciente) => paciente.especialidad
+  );
+  return pacientesPediatria;
+};
 
-// console.log(obtenPacientesAsignadosAPediatria(pacientes));
+console.log(obtenPacientesAsignadosAPediatria(pacientes));
+
+// Pacientes que están asignados a la especialidad de Pediatría y edad menor a 10 años
+const obtenPacientesEdadMenor = (pacientes: Pacientes[]): Pacientes[] => {
+  const pacientesPediatria = pacientes.filter(
+    (paciente) => "Pediatra" && paciente.edad < 10
+  );
+  return pacientesPediatria;
+};
+
+console.log(obtenPacientesEdadMenor(pacientes));
